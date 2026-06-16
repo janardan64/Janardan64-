@@ -1,0 +1,27 @@
+
+{
+  "entities": {
+    "Transaction": {
+      "title": "Transaction",
+      "description": "A single financial entry in the ledger",
+      "type": "object",
+      "properties": {
+        "amount": { "type": "number", "description": "The transaction amount" },
+        "note": { "type": "string", "description": "Description of the expense" },
+        "date": { "type": "string", "format": "date-time", "description": "ISO date string" },
+        "category": { "type": "string", "description": "Categorized label for the expense" },
+        "userId": { "type": "string", "description": "The ID of the user who owns this transaction" }
+      },
+      "required": ["amount", "note", "date", "userId"]
+    }
+  },
+  "auth": {
+    "providers": ["anonymous"]
+  },
+  "firestore": {
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "User's private transaction history"
+    }
+  }
+}
